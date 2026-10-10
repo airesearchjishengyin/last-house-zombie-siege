@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>最后防线｜小红书轮播图源稿</title>
+<style>
+@page { size: 1242px 1660px; margin: 0; }
+* { box-sizing: border-box; }
+body { margin: 0; background: #0c1210; color: #eff4ee; font-family: "Hiragino Sans GB", "PingFang SC", sans-serif; }
+.sheet { width: 1242px; height: 1660px; position: relative; overflow: hidden; padding: 68px; background: radial-gradient(ellipse at 82% 6%, #1e342d 0, transparent 35%), linear-gradient(150deg,#111a17,#0b100f 70%); }
+.top { display:flex; align-items:center; justify-content:space-between; color:#91a39a; font: 600 20px/1.2 Arial,sans-serif; letter-spacing:2px; }
+.brand { display:flex; align-items:center; gap:16px; color:#dce8df; letter-spacing:1px; }
+.mark { width:48px;height:48px;border:1px solid #6e9a7d;border-radius:12px;display:grid;place-items:center;color:#a5d7b0;font-size:18px; }
+.index { border:1px solid #34463d; border-radius:99px; padding:12px 18px; }
+.eyebrow { margin-top:105px; color:#a3d9ae; font-size:25px; font-weight:700; letter-spacing:2px; }
+h1 { margin:22px 0 0; font-size:88px; line-height:1.13; letter-spacing:0; font-weight:800; max-width:1050px; }
+.dek { margin-top:30px; max-width:900px; color:#b7c6bc; font-size:32px; line-height:1.55; }
+.shot { position:absolute; left:68px; right:68px; top:600px; height:760px; padding:12px; border:1px solid #34463c; border-radius:18px; background:#131c18; box-shadow:0 30px 70px #0008; }
+.shot img { width:100%;height:100%;object-fit:cover; object-position:center 30%;border-radius:10px; }
+.shot.wide img { object-position:center 34%; }
+.callout { position:absolute; left:68px; right:68px; bottom:160px; border-left:5px solid #9cd4a8; padding:8px 0 8px 25px; color:#dce8df; font-size:27px; line-height:1.55; }
+.foot { position:absolute; bottom:58px; left:68px; right:68px; display:flex; justify-content:space-between; color:#74847b; font:600 18px/1.2 Arial,sans-serif; letter-spacing:1.5px; }
+.badge { position:absolute; right:100px; top:515px; color:#0f1813; background:#a3d9ae; padding:14px 18px; border-radius:6px; font-size:21px; font-weight:800; }
+.sheet.cover h1 { font-size:106px; max-width:940px; }
+.sheet.cover .shot { top:660px; height:680px; }
+.sheet.cover .dek { max-width:790px; }
+.sheet.closing .shot { height:690px; }
+.sheet.closing .callout { bottom:170px; }
+</style>
+</head>
+<body>
+<article class="sheet cover">
+  <div class="top"><div class="brand"><span class="mark">LH</span><span>LAST HOUSE · OUTPOST 07</span></div><span class="index">01 / 05</span></div>
+  <div class="eyebrow">一个浏览器里的 AI 生存模拟</div>
+  <h1>我做了个<br>AI 尸潮生存游戏</h1>
+  <p class="dek">人类小队深入巢穴，找出藏起来的母体。每次决策都会变成队伍真实的行动。</p>
+  <div class="badge">项目实机画面</div>
+  <div class="shot"><img src="screenshots/foundry-assault.png" alt="人类小队与巢穴地图"></div>
+  <div class="callout">开源 Laya 决策模型负责选战术，规则 AI 负责操控尸群。</div>
+  <div class="foot"><span>最后防线：尸潮围城</span><span>AI GAME · OPEN SOURCE</span></div>
+</article>
+<article class="sheet">
+  <div class="top"><div class="brand"><span class="mark">LH</span><span>LAST HOUSE · MISSION</span></div><span class="index">02 / 05</span></div>
+  <div class="eyebrow">不是一张空地贴几个单位</div>
+  <h1>迷宫、密室<br>还有两座桥</h1>
+  <p class="dek">巢穴里有房间和窄路；河谷地图被水域分开，只能从桥上穿过去。</p>
+  <div class="shot"><img src="screenshots/river-running.png" alt="河谷地图、桥梁和小队"></div>
+  <div class="callout">摧毁母体任务：探索巢穴，消灭或躲开路上的感染者，找到小型母体再完成攻击。</div>
+  <div class="foot"><span>路线与障碍参与模拟</span><span>MAPS · 02</span></div>
+</article>
+<article class="sheet">
+  <div class="top"><div class="brand"><span class="mark">LH</span><span>LAST HOUSE · TACTICS</span></div><span class="index">03 / 05</span></div>
+  <div class="eyebrow">模型的选择要能看得见</div>
+  <h1>“侧翼包抄”<br>真的会分路</h1>
+  <p class="dek">支援火力压住目标，步枪和霰弹小队绕到两侧。画面会显示路线、目标和执行人数。</p>
+  <div class="shot"><img src="screenshots/foundry-assault.png" alt="战术面板和小队路线"></div>
+  <div class="callout">可选战术随局势变化：搜索、压制、包抄、突击母体、补给或防守。</div>
+  <div class="foot"><span>Laya checkpoint 尚未专项训练</span><span>TACTICS · 03</span></div>
+</article>
+<article class="sheet">
+  <div class="top"><div class="brand"><span class="mark">LH</span><span>LAST HOUSE · CUSTOMIZE</span></div><span class="index">04 / 05</span></div>
+  <div class="eyebrow">玩法参数可以自己调</div>
+  <h1>弹药要不要省？<br>尸潮要多难？</h1>
+  <p class="dek">调整人类数量、首波尸数、僵尸血量和增援。有限弹药时，队伍得去补给点补弹。</p>
+  <div class="shot"><img src="screenshots/river-running.png" alt="战场面板与河谷地图"></div>
+  <div class="callout">迷宫、地堡、工厂、河谷；也能自己摆掩体，再导入或导出地图 JSON。</div>
+  <div class="foot"><span>多地图 · 双任务 · 两种弹药模式</span><span>PLAY YOUR WAY · 04</span></div>
+</article>
+<article class="sheet closing">
+  <div class="top"><div class="brand"><span class="mark">LH</span><span>LAST HOUSE · OPEN SOURCE</span></div><span class="index">05 / 05</span></div>
+  <div class="eyebrow">代码已经开源</div>
+  <h1>本机就能玩<br>也欢迎一起改</h1>
+  <p class="dek">不装模型可以用规则基线试玩；想接 Laya，仓库里有本机启动说明。</p>
+  <div class="shot"><img src="screenshots/mother-marked.png" alt="巢穴地图与母体战斗结束画面"></div>
+  <div class="callout">GitHub 搜索：airesearchjishengyin / last-house-zombie-siege</div>
+  <div class="foot"><span>MIT · Browser game · Local model</span><span>OPEN SOURCE · 05</span></div>
+</article>
+<script>
+const slide = Number(new URLSearchParams(location.search).get("slide") || 1);
+document.querySelectorAll(".sheet").forEach((card, index) => {
+  card.hidden = index + 1 !== slide;
+});
+</script>
+</body>
+</html>

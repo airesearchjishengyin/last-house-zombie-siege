@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111817">
+  <title>最后防线：尸潮围城</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="最后防线主页">
+        <span class="brand-mark">LH</span><span>最后防线<span class="brand-sub">OUTPOST 07 · NIGHT WATCH</span></span>
+      </a>
+      <div class="top-status"><span class="live-dot"></span><span id="phase-label">待命</span><span class="status-divider"></span><span id="clock">第 00:00 分钟</span></div>
+      <div class="top-actions">
+        <button class="icon-btn sound-btn" id="sound-toggle" title="音效开关" aria-label="音效开关">♫</button>
+        <button class="icon-btn" id="help-btn" title="操作说明" aria-label="操作说明">?</button>
+        <span class="operator"><span class="avatar">M</span><span>指挥官<br><b>守夜人</b></span></span>
+      </div>
+    </header>
+
+    <section class="overview">
+      <div><div class="eyebrow">防线监视 · 7号前哨站</div><h1>尸潮围城</h1></div>
+      <div class="overview-right"><div class="weather"><span class="weather-icon">☾</span><span>阴 · 低能见度<br><b>夜间 02:17</b></span></div><div class="divider-v"></div><div class="day-count"><span>生存记录</span><b>DAY <strong id="day-count">01</strong></b></div></div>
+    </section>
+
+    <section class="game-layout">
+      <div class="battle-column">
+        <div class="battle-toolbar">
+          <div class="map-name"><span class="map-pin">⌖</span><span><b id="map-title">北岭避难所</b><small id="map-subtitle">防御区域 · 扇形阵地</small></span></div>
+          <div class="combat-meta"><span><i class="legend-z"></i>尸群 <b id="zombie-count">000</b></span><span><i class="legend-h"></i>守军 <b id="human-count">018</b></span></div>
+          <div class="view-actions"><button id="speed-btn" class="small-btn" title="切换模拟速度">1×</button><button id="pause-btn" class="small-btn" title="暂停/继续">Ⅱ</button><button id="reset-btn" class="small-btn" title="重新开始">↻</button></div>
+        </div>
+        <div class="scenario-controls">
+          <label>地图<select id="map-select" class="scenario-select"><option value="labyrinth">回声迷宫</option><option value="chambers">蜂巢地堡</option><option value="river">黑水河谷</option><option value="ridge">北岭避难所</option><option value="crossroads">十字路口</option><option value="foundry">废弃工厂</option><option value="custom">自定义地图</option></select></label>
+          <label>任务<select id="objective-select" class="scenario-select"><option value="protect">保护种子库</option><option value="destroy">摧毁母体</option></select></label>
+          <label>弹药<select id="ammo-select" class="scenario-select"><option value="infinite">无限子弹</option><option value="finite">有限弹药</option></select></label>
+          <button class="edit-map-btn" id="edit-map-btn" title="编辑自定义地图" aria-pressed="false">✎ 编辑地图</button>
+          <button class="edit-map-btn" id="export-map-btn" title="导出自定义地图 JSON">导出</button>
+          <button class="edit-map-btn" id="import-map-btn">导入</button>
+          <input type="file" id="import-map-file" accept="application/json,.json" hidden>
+          <span id="map-edit-hint" class="map-edit-hint">选择地图与任务后开始</span>
+        </div>
+        <div class="mission-strip"><span id="mission-stage">守卫种子库</span><span id="ammo-status">弹药 ∞</span><span id="supply-status">补给 0 次</span></div>
+        <details class="difficulty-panel">
+          <summary>难度与兵力 <span id="difficulty-summary">18 人 · 首波 16 尸 · 28 HP</span></summary>
+          <div class="difficulty-fields">
+            <label>预设<select id="difficulty-preset"><option value="easy">轻松</option><option value="normal" selected>标准</option><option value="hard">困难</option><option value="custom">自定义</option></select></label>
+            <label>人类数量<input id="human-setting" type="number" min="4" max="60" step="1" value="18"></label>
+            <label>首波僵尸<input id="zombie-setting" type="number" min="0" max="160" step="1" value="16"></label>
+            <label>普通僵尸血量<input id="hp-setting" type="number" min="10" max="300" step="1" value="28"></label>
+            <label>每分钟增援<input id="spawn-setting" type="number" min="0" max="120" step="1" value="24"></label>
+          </div>
+          <p>待命时调整，立即应用。精英血量 ×1.65；防守后续波次递增。增援设为 0 可关闭持续刷怪。</p>
+        </details>
+        <div class="arena-wrap">
+          <canvas id="arena" aria-label="守军与尸群的实时战场"></canvas>
+          <div class="arena-corner arena-coord">N 41°08′ · E 113°17′</div>
+          <div class="arena-corner arena-scale"><span></span> 25 m</div>
+          <div class="alert-chip" id="breach-alert"><span>!</span> 种子库正在承受攻击</div>
+          <div class="start-overlay" id="start-overlay">
+            <div class="start-emblem">◈</div><div class="start-title">防线已就绪</div><div class="start-copy">夜色降临。守住种子库，或深入巢穴摧毁隐藏母体。</div>
+            <button class="start-btn" id="start-btn"><span>▶</span> 开始守夜</button>
+            <div class="start-foot">自动战斗 · 预计 6 分钟</div>
+          </div>
+        </div>
+        <div class="battle-footer">
+          <div class="wave-info"><span class="wave-tag">尸潮推进</span><b id="wave-display">01</b><span class="wave-total">/ 06</span><div class="wave-track"><i id="wave-progress"></i></div></div>
+          <div class="gate-status"><span class="gate-icon">⌑</span><span id="gate-label">种子库耐久</span><div class="gate-track"><i id="gate-health"></i></div><b id="gate-value">100%</b></div>
+        </div>
+      </div>
+
+      <aside class="side-panel">
+        <section class="panel-section roster-section">
+            <div class="section-head"><div><span class="section-kicker">人类 · 自动执行战术</span><h2>守军编制</h2></div><button class="link-btn" id="roster-detail">编制详情 ↗</button></div>
+          <div class="roster-count"><b id="roster-alive">18</b><span>/ <span id="roster-total">18</span> 人类存活</span><span class="survivor-pill"><i></i><span id="roster-lost">0</span> 人已同化</span></div>
+          <div class="unit-list">
+            <div class="unit-row"><span class="unit-icon machine">⌁</span><span class="unit-name">机枪手</span><div class="unit-bar"><i style="width:22%"></i></div><b id="machine-count">4</b></div>
+            <div class="unit-row"><span class="unit-icon rifle">⌁</span><span class="unit-name">步枪手</span><div class="unit-bar"><i style="width:34%"></i></div><b id="rifle-count">6</b></div>
+            <div class="unit-row"><span class="unit-icon sniper">⌖</span><span class="unit-name">狙击手</span><div class="unit-bar"><i style="width:22%"></i></div><b id="sniper-count">4</b></div>
+            <div class="unit-row"><span class="unit-icon shotgun">⌁</span><span class="unit-name">霰弹兵</span><div class="unit-bar"><i style="width:22%"></i></div><b id="shotgun-count">4</b></div>
+          </div>
+        </section>
+
+        <section class="panel-section model-section">
+          <div class="section-head"><div><span class="section-kicker">SYSTEM ONE · LOCAL</span><h2>人类决策模型</h2></div><span class="model-live"><i></i>本地</span></div>
+          <label class="model-select-label" for="model-select">战术指挥核心</label>
+          <select id="model-select" class="model-select"><option value="laya">Laya · 专项决策模型</option><option value="fast">规则基线</option></select>
+          <div class="model-details"><span class="license-tag">Apache 2.0</span><span id="model-availability">检查模型连接中…</span></div>
+          <div class="model-readout"><span class="readout-label">当前战术</span><b id="posture-value">原地坚守</b><span class="latency-value"><strong id="decision-latency">--</strong><small>ms</small></span></div>
+          <p class="model-reason" id="model-reason">待接收战场态势。战术推理在后台进行，战斗不会等待模型响应。</p>
+          <p class="model-reason" id="model-raw">模型原始建议：等待评估</p>
+          <div class="tactic-card"><div><b id="tactic-source">等待决策</b><label><input id="show-orders" type="checkbox" checked> 显示路线</label></div><p id="tactic-effect">开始后显示队伍分工、移动目标和交战优先级。</p><small id="tactic-input">只根据已观察到的敌情制定战术。</small></div>
+          <div class="decision-history" id="decision-history" aria-label="最近战术记录"></div>
+          <div class="model-meter"><span>模型延迟</span><div class="meter-track"><i id="latency-meter"></i></div><b id="latency-label">-- ms</b></div>
+          <div class="model-actions"><button class="test-model-btn" id="test-model">↗ <span>测试一次模型响应</span></button><span id="model-call-state">每 6 秒一次</span></div>
+        </section>
+
+        <section class="panel-section horde-section">
+          <div class="section-head"><div><span class="section-kicker">INFECTED · RULE-BASED</span><h2>尸群态势</h2></div><span class="zombie-total"><span id="zombie-alive">000</span><small> / 520</small></span></div>
+          <div class="horde-stats"><div><span>当前尸数</span><b id="horde-total">000</b></div><div><span>累计击杀</span><b id="kills-total">000</b></div><div><span>下一波抵达</span><b id="next-wave">准备中</b></div></div>
+          <div class="wave-track-list"><span class="wave-dot active"></span><span class="wave-dot"></span><span class="wave-dot"></span><span class="wave-dot"></span><span class="wave-dot"></span><span class="wave-dot"></span></div>
+        </section>
+
+        <section class="panel-section event-section"><div class="section-head"><div><span class="section-kicker">FIELD LOG · LIVE</span><h2>战场记录</h2></div><span class="log-count" id="log-count">01</span></div><div class="event-log" id="event-log"><div class="log-entry"><time>02:17</time><span class="log-marker safe"></span><p>守军已进入防御阵位，等待指令。</p></div></div></section>
+      </aside>
+    </section>
+    <footer class="bottomline"><span>OUTPOST 07 <b>·</b> NIGHT WATCH PROTOCOL</span><span>模拟战场 <b>v0.4.0</b></span></footer>
+  </main>
+  <div class="toast" id="toast" role="status"></div>
+  <div class="modal-backdrop" id="help-modal" hidden><section class="modal"><button class="modal-close" id="close-modal" aria-label="关闭">×</button><span class="section-kicker">快速说明</span><h2>守住最后防线</h2><p>守军会自动选择阵位、攻击逼近的尸群。建筑与掩体阻挡移动和射击，僵尸会绕开建筑寻找路线；接触人类会立即同化。</p><p>保护种子库：撑过 6 波尸潮。摧毁母体：360 秒内探索巢穴并击毁隐藏的 900 HP 小型母体。重置后可切换地图与任务。点击“编辑地图”，再点击空地添加掩体，点击掩体移除；再次点击结束编辑。地图自动保存在本机，也可以导入/导出 JSON。</p><p>Laya 从当前可执行的动作中选择：分队搜索、定点压制、侧翼包抄、突击母体、集合补给、环形守卫。地图上的彩色路线表示真实移动路径，标记表示战术目标。近身避险和缺弹补给由单位自动执行；面板展示模型原始概率、实际战术和历史。难度与兵力中可调整人数、首波尸数、血量和持续增援。</p><button class="start-btn modal-ok" id="close-modal-ok">继续</button></section></div>
+  <script src="maps.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>
