@@ -83,7 +83,7 @@ jobs:
             server.py
       - run: npm ci
       - name: Package app
-        run: npm run package:${{ matrix.target }} -- --${{ runner.arch == 'ARM64' && 'arm64' || 'x64' }}
+        run: npm run package:${{ matrix.target }}
       - uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.artifact }}-${{ runner.arch }}

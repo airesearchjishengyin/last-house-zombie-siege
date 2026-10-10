@@ -6,8 +6,8 @@
   "main": "electron/main.cjs",
   "scripts": {
     "start": "electron .",
-    "package:mac": "electron-builder --mac zip",
-    "package:win": "electron-builder --win nsis --x64"
+    "package:mac": "electron-builder --mac zip --publish never",
+    "package:win": "electron-builder --win nsis --x64 --publish never"
   },
   "devDependencies": {
     "electron": "44.7.0",
