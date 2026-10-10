@@ -2,6 +2,10 @@
 
 一个浏览器里的 AI 战术生存模拟游戏：人类小队由开源 Laya typed-decision checkpoint 选择战术，僵尸按规则追击、绕障和同化。纯规则基线也可以运行。游戏与决策服务均可在本机启动。
 
+## 公网试玩
+
+游客可直接打开 **https://games.macagents.org/** 体验，无需安装或部署。网站由项目维护者的 MacBook 通过 Cloudflare Tunnel 提供服务；主机休眠、关机或断网时，公网访问会暂时不可用。游戏前端可以继续在浏览器运行，Laya 决策服务离线时会回退到本地规则决策。
+
 ## 快速开始
 
 ```sh
@@ -44,6 +48,7 @@ Laya 从当前合法动作中选择战术：分队搜索、定点压制、侧翼
 node --check game.js
 python3 -m py_compile server.py
 node tests/simulation.cjs
+python3 -m unittest discover -s tests -p 'server_security.py'
 ```
 
 模拟检查覆盖绕墙、低帧率位移、子弹命中顺序、快速子弹与薄墙、接触同化、地图数据校验、六种地图/任务组合以及最终防守波次获胜。浏览器验证包括进攻、防守、地图编辑持久保存和 JSON 导入/导出。
