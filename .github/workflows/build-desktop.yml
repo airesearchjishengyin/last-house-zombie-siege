@@ -41,11 +41,13 @@ jobs:
             os: macos-14
             target: mac
             artifact: last-house-macos
+            artifact_path: release/Last House-*-mac.zip
           - name: Windows x64
             os: windows-2022
             target: win
             data_separator: ';'
             artifact: last-house-windows-x64
+            artifact_path: release/Last House Setup *.exe
 
     steps:
       - uses: actions/checkout@v4
@@ -87,6 +89,6 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.artifact }}-${{ runner.arch }}
-          path: release/*
+          path: ${{ matrix.artifact_path }}
           if-no-files-found: error
           retention-days: 30
