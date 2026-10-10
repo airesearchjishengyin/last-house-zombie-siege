@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import os
 import ipaddress
+import sys
 import threading
 import time
 import urllib.error
@@ -12,7 +13,7 @@ from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import urlsplit
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(sys.executable).resolve().parent if getattr(sys, "frozen", False) else Path(__file__).resolve().parent
 DECISION_API = os.environ.get("DECISION_API", "http://127.0.0.1:8790")
 MODEL = "Laya · typed-decisions"
 MAX_DECISIONS_PER_MINUTE = 30

@@ -1,0 +1,46 @@
+{
+  "name": "last-house-zombie-siege",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Last House browser-based tactical survival game",
+  "main": "electron/main.cjs",
+  "scripts": {
+    "start": "electron .",
+    "package:mac": "electron-builder --mac zip",
+    "package:win": "electron-builder --win nsis --x64"
+  },
+  "devDependencies": {
+    "electron": "44.7.0",
+    "electron-builder": "26.15.3"
+  },
+  "build": {
+    "appId": "org.macagents.lasthouse",
+    "productName": "Last House",
+    "asar": true,
+    "files": [
+      "electron/main.cjs",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "dist/last-house-server",
+        "to": "backend",
+        "filter": ["**/*"]
+      }
+    ],
+    "directories": {
+      "output": "release"
+    },
+    "mac": {
+      "target": ["zip"],
+      "category": "public.app-category.games"
+    },
+    "win": {
+      "target": ["nsis"]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
+  }
+}

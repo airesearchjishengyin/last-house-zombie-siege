@@ -6,6 +6,10 @@
 
 游客可直接打开 **https://games.macagents.org/** 体验，无需安装或部署。网站由项目维护者的 MacBook 通过 Cloudflare Tunnel 提供服务；主机休眠、关机或断网时，公网访问会暂时不可用。游戏前端可以继续在浏览器运行，Laya 决策服务离线时会回退到本地规则决策。
 
+## 桌面版本
+
+GitHub Actions 会按 macOS runner 架构构建 ZIP 应用包，并构建 Windows x64 安装包。工作流完成后，可在仓库的 Actions 运行记录中下载对应 artifact；桌面包内置游戏服务，无需单独安装 Python。Laya 模型服务仍为可选项，未启动时游戏会使用规则基线。
+
 ## 快速开始
 
 ```sh

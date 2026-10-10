@@ -13,18 +13,23 @@ body { margin: 0; background: #0c1210; color: #eff4ee; font-family: "Hiragino Sa
 .brand { display:flex; align-items:center; gap:16px; color:#dce8df; letter-spacing:1px; }
 .mark { width:48px;height:48px;border:1px solid #6e9a7d;border-radius:12px;display:grid;place-items:center;color:#a5d7b0;font-size:18px; }
 .index { border:1px solid #34463d; border-radius:99px; padding:12px 18px; }
-.eyebrow { margin-top:105px; color:#a3d9ae; font-size:25px; font-weight:700; letter-spacing:2px; }
-h1 { margin:22px 0 0; font-size:88px; line-height:1.13; letter-spacing:0; font-weight:800; max-width:1050px; }
-.dek { margin-top:30px; max-width:900px; color:#b7c6bc; font-size:32px; line-height:1.55; }
-.shot { position:absolute; left:68px; right:68px; top:600px; height:760px; padding:12px; border:1px solid #34463c; border-radius:18px; background:#131c18; box-shadow:0 30px 70px #0008; }
+.eyebrow { margin-top:72px; color:#a3d9ae; font-size:23px; font-weight:700; letter-spacing:0; }
+h1 { margin:18px 0 0; font-size:70px; line-height:1.1; letter-spacing:0; font-weight:800; max-width:1050px; }
+.dek { margin-top:16px; max-width:900px; color:#b7c6bc; font-size:24px; line-height:1.38; }
+.details { position:absolute; top:510px; left:68px; right:68px; display:grid; grid-template-columns:repeat(3,1fr); gap:16px; color:#c9d4cc; font-size:18px; line-height:1.4; }
+.detail { min-height:92px; padding:12px 16px; border-left:2px solid #75aa83; background:#16211c; }
+.detail b { display:block; margin-bottom:4px; color:#a9d8b3; font-size:16px; }
+.shot { position:absolute; left:68px; right:68px; top:625px; height:690px; padding:12px; border:1px solid #34463c; border-radius:18px; background:#131c18; box-shadow:0 30px 70px #0008; }
 .shot img { width:100%;height:100%;object-fit:cover; object-position:center 30%;border-radius:10px; }
 .shot.wide img { object-position:center 34%; }
 .callout { position:absolute; left:68px; right:68px; bottom:160px; border-left:5px solid #9cd4a8; padding:8px 0 8px 25px; color:#dce8df; font-size:27px; line-height:1.55; }
 .foot { position:absolute; bottom:58px; left:68px; right:68px; display:flex; justify-content:space-between; color:#74847b; font:600 18px/1.2 Arial,sans-serif; letter-spacing:1.5px; }
-.badge { position:absolute; right:100px; top:515px; color:#0f1813; background:#a3d9ae; padding:14px 18px; border-radius:6px; font-size:21px; font-weight:800; }
-.sheet.cover h1 { font-size:106px; max-width:940px; }
-.sheet.cover .shot { top:660px; height:680px; }
+.badge { display:none; }
+.sheet.cover .eyebrow { margin-top:72px; }
+.sheet.cover h1 { font-size:82px; max-width:940px; }
+.sheet.cover .shot { top:625px; height:690px; }
 .sheet.cover .dek { max-width:790px; }
+.sheet:not(.cover) .shot { top:625px; height:690px; }
 .sheet.closing .shot { height:690px; }
 .sheet.closing .callout { bottom:170px; }
 </style>
@@ -32,48 +37,53 @@ h1 { margin:22px 0 0; font-size:88px; line-height:1.13; letter-spacing:0; font-w
 <body>
 <article class="sheet cover">
   <div class="top"><div class="brand"><span class="mark">LH</span><span>LAST HOUSE · OUTPOST 07</span></div><span class="index">01 / 05</span></div>
-  <div class="eyebrow">一个浏览器里的 AI 生存模拟</div>
-  <h1>我做了个<br>AI 尸潮生存游戏</h1>
-  <p class="dek">人类小队深入巢穴，找出藏起来的母体。每次决策都会变成队伍真实的行动。</p>
+  <div class="eyebrow">独立开发 · 浏览器实机 · 开源</div>
+  <h1>让 AI 带队<br>杀出僵尸巢穴</h1>
+  <p class="dek">我把“电子斗蛐蛐”做成了小队生存战：人类找路、选战术，规则控制的尸群会追击并同化。</p>
+  <div class="details"><div class="detail"><b>胜利目标</b>穿过巢穴，找到藏起来的小型母体</div><div class="detail"><b>战场规则</b>墙挡移动也挡子弹，桥梁决定过河路线</div><div class="detail"><b>可直接试玩</b>浏览器打开即可，不必安装模型</div></div>
   <div class="badge">项目实机画面</div>
   <div class="shot"><img src="screenshots/foundry-assault.png" alt="人类小队与巢穴地图"></div>
-  <div class="callout">开源 Laya 决策模型负责选战术，规则 AI 负责操控尸群。</div>
+  <div class="callout">人类由开源 Laya typed-decision checkpoint 选择战术；尸群按规则追击、绕障和同化。</div>
   <div class="foot"><span>最后防线：尸潮围城</span><span>AI GAME · OPEN SOURCE</span></div>
 </article>
 <article class="sheet">
   <div class="top"><div class="brand"><span class="mark">LH</span><span>LAST HOUSE · MISSION</span></div><span class="index">02 / 05</span></div>
-  <div class="eyebrow">不是一张空地贴几个单位</div>
-  <h1>迷宫、密室<br>还有两座桥</h1>
-  <p class="dek">巢穴里有房间和窄路；河谷地图被水域分开，只能从桥上穿过去。</p>
+  <div class="eyebrow">地图会改变路线和交战距离</div>
+  <h1>迷宫、密室<br>河流与桥梁</h1>
+  <p class="dek">我给巢穴加了相连房间、窄廊和射击孔；河谷把战场分成两岸，队伍必须选择桥梁推进。</p>
+  <div class="details"><div class="detail"><b>回声迷宫</b>环形路线、假岔路与巢室，母体位置不会提前显示</div><div class="detail"><b>蜂巢地堡</b>多个密室由狭窄通道连接，适合观察分队搜索</div><div class="detail"><b>黑水河谷</b>水面挡移动但不挡射击，两座桥形成关键路口</div></div>
   <div class="shot"><img src="screenshots/river-running.png" alt="河谷地图、桥梁和小队"></div>
-  <div class="callout">摧毁母体任务：探索巢穴，消灭或躲开路上的感染者，找到小型母体再完成攻击。</div>
+  <div class="callout">路线参与真实寻路与碰撞；开口能通行，墙体会挡住子弹，地图不只是背景图。</div>
   <div class="foot"><span>路线与障碍参与模拟</span><span>MAPS · 02</span></div>
 </article>
 <article class="sheet">
   <div class="top"><div class="brand"><span class="mark">LH</span><span>LAST HOUSE · TACTICS</span></div><span class="index">03 / 05</span></div>
-  <div class="eyebrow">模型的选择要能看得见</div>
-  <h1>“侧翼包抄”<br>真的会分路</h1>
-  <p class="dek">支援火力压住目标，步枪和霰弹小队绕到两侧。画面会显示路线、目标和执行人数。</p>
+  <div class="eyebrow">模型指令必须改变单位行为</div>
+  <h1>“分队搜索”<br>不是一句台词</h1>
+  <p class="dek">步枪和霰弹小队分开搜索房间，机枪与狙击手跟进掩护。地图上能看到每队路线、搜索目标和人数。</p>
+  <div class="details"><div class="detail"><b>分队搜索</b>步枪、霰弹兵探索未搜索房间，远程火力跟进掩护</div><div class="detail"><b>定点压制</b>暂停推进，优先处理贴近队伍或堵住通道的敌人</div><div class="detail"><b>补给与突击</b>弹药不足时集合补给；发现母体后转入攻击</div></div>
   <div class="shot"><img src="screenshots/foundry-assault.png" alt="战术面板和小队路线"></div>
-  <div class="callout">可选战术随局势变化：搜索、压制、包抄、突击母体、补给或防守。</div>
+  <div class="callout">说明：模型用的是通用开源 checkpoint，尚未用本游戏数据专项训练；候选动作和执行规则由项目定义。</div>
   <div class="foot"><span>Laya checkpoint 尚未专项训练</span><span>TACTICS · 03</span></div>
 </article>
 <article class="sheet">
   <div class="top"><div class="brand"><span class="mark">LH</span><span>LAST HOUSE · CUSTOMIZE</span></div><span class="index">04 / 05</span></div>
-  <div class="eyebrow">玩法参数可以自己调</div>
-  <h1>弹药要不要省？<br>尸潮要多难？</h1>
-  <p class="dek">调整人类数量、首波尸数、僵尸血量和增援。有限弹药时，队伍得去补给点补弹。</p>
+  <div class="eyebrow">一局的压力可以自己设定</div>
+  <h1>子弹有限？<br>尸潮再加一倍？</h1>
+  <p class="dek">开局前调整人类数量、首波尸数、感染者血量和增援速度；有限弹药时，小队要定期寻找补给点。</p>
+  <div class="details"><div class="detail"><b>兵力与血量</b>从轻松、标准到困难，也能逐项自定义</div><div class="detail"><b>弹药规则</b>无限模式专注交战；有限模式需要补充弹药</div><div class="detail"><b>自己造地图</b>添加或移除掩体，保存到浏览器或导入 JSON</div></div>
   <div class="shot"><img src="screenshots/river-running.png" alt="战场面板与河谷地图"></div>
-  <div class="callout">迷宫、地堡、工厂、河谷；也能自己摆掩体，再导入或导出地图 JSON。</div>
+  <div class="callout">这些设置会改变生存压力：人数少、感染者更耐打或增援更快，都会增加资源与路线取舍。</div>
   <div class="foot"><span>多地图 · 双任务 · 两种弹药模式</span><span>PLAY YOUR WAY · 04</span></div>
 </article>
 <article class="sheet closing">
   <div class="top"><div class="brand"><span class="mark">LH</span><span>LAST HOUSE · OPEN SOURCE</span></div><span class="index">05 / 05</span></div>
-  <div class="eyebrow">代码已经开源</div>
-  <h1>本机就能玩<br>也欢迎一起改</h1>
-  <p class="dek">不装模型可以用规则基线试玩；想接 Laya，仓库里有本机启动说明。</p>
+  <div class="eyebrow">可以试玩，也可以读代码和改地图</div>
+  <h1>浏览器直接玩<br>源码也已开源</h1>
+  <p class="dek">公网试玩无需部署；下载项目后可以本地运行。想接 Laya 决策服务，仓库写了模型来源和启动步骤。</p>
+  <div class="details"><div class="detail"><b>游客试玩</b>打开 games.macagents.org，选择地图和任务即可开局</div><div class="detail"><b>本地规则基线</b>不启动模型也能体验完整战斗和地图编辑</div><div class="detail"><b>参与改进</b>欢迎反馈战术映射、地图路线和难度问题</div></div>
   <div class="shot"><img src="screenshots/mother-marked.png" alt="巢穴地图与母体战斗结束画面"></div>
-  <div class="callout">GitHub 搜索：airesearchjishengyin / last-house-zombie-siege</div>
+  <div class="callout">GitHub：airesearchjishengyin/last-house-zombie-siege · MIT 许可 · macOS / Windows 桌面包由 GitHub Actions 构建</div>
   <div class="foot"><span>MIT · Browser game · Local model</span><span>OPEN SOURCE · 05</span></div>
 </article>
 <script>

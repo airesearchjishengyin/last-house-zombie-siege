@@ -3,3 +3,8 @@ __pycache__/
 *.py[cod]
 .playwright-cli/
 output/playwright/
+node_modules/
+build/
+dist/
+release/
+*.spec
